@@ -9,7 +9,7 @@ From: rocker/rstudio:4.5.0
     Base         rocker/rstudio (debian)
 
 %post
-    set -euo pipefail
+    set -eu
     export DEBIAN_FRONTEND=noninteractive
 
     # ---- System dependencies -------------------------------------------
@@ -30,8 +30,10 @@ From: rocker/rstudio:4.5.0
     apt-get clean
     rm -rf /var/lib/apt/lists/*
 
-    # ---- Python: install Jupyter + scientific stack --------------------
-    python3 -m pip install --no-cache-dir --break-system-packages \
+    # ---- Python: virtual environment with Jupyter + scientific stack ---
+    python3 -m venv /opt/venv
+    /opt/venv/bin/pip install --no-cache-dir --upgrade pip setuptools wheel
+    /opt/venv/bin/pip install --no-cache-dir \
         jupyterlab notebook ipykernel ipywidgets \
         numpy pandas scipy scikit-learn matplotlib seaborn \
         anndata scanpy
@@ -45,6 +47,7 @@ From: rocker/rstudio:4.5.0
     chmod -R 777 /usr/local/lib/R/site-library
 
 %environment
+    export PATH=/opt/venv/bin:$PATH
     export R_LIBS_USER=/usr/local/lib/R/site-library
     export LANG=C.UTF-8
     export LC_ALL=C.UTF-8
