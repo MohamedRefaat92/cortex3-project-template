@@ -114,6 +114,7 @@ print_tunnel_command() {
     local local_port="$1"
     local node="$2"
     local remote_port="$3"
+    local ssh_alias="${SSH_ALIAS:-ludwig_cluster}"
 
     cat <<EOF
 
@@ -122,7 +123,7 @@ print_tunnel_command() {
 ==================================================================
  On your Mac, in a NEW terminal, run:
 
-   ssh -N -L ${local_port}:${node}:${remote_port} ludwig_cluster
+   ssh -N -L ${local_port}:${node}:${remote_port} ${ssh_alias}
 
  Then open in your browser:
 
