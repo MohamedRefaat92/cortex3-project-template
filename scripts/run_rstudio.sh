@@ -79,10 +79,12 @@ mkdir -p "$RSERVER_TMP/server" "$RSERVER_TMP/data"
 apptainer exec \
     --bind "$PROJECT_ROOT":"$WORKSPACE" \
     --bind "$PROJECT_ROOT/R":/usr/local/lib/R/site-library \
+    --bind "$DATA_ROOT_HOST":"$DATA_ROOT_CONTAINER":ro \
     --bind "$RSERVER_TMP/server":/var/run/rstudio-server \
     --bind "$RSERVER_TMP/data":/var/lib/rstudio-server \
     --env R_LIBS_USER=/usr/local/lib/R/site-library \
     --env USER="$USER" \
+    --env HOME="$WORKSPACE" \
     --pwd "$WORKSPACE" \
     "$SIF" \
     /usr/lib/rstudio-server/bin/rserver \
