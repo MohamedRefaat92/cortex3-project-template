@@ -1,0 +1,61 @@
+# --- Project config (per-machine) ---------------------------------------
+.env
+
+# --- Container artifacts ------------------------------------------------
+container/*.sif
+container/*.img
+
+# --- SLURM job outputs --------------------------------------------------
+slurm/logs/*.out
+slurm/logs/*.err
+slurm/archive/*.out
+slurm/archive/*.err
+!slurm/**/.gitkeep
+
+# --- R ------------------------------------------------------------------
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+*.Rcheck/
+renv/library/
+renv/local/
+renv/cellar/
+renv/staging/
+renv/python/
+renv/sandbox/
+R/
+!R/.gitkeep
+
+# --- Python -------------------------------------------------------------
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.py-venv/
+
+# --- Quarto / Jupyter ---------------------------------------------------
+_book/
+_freeze/
+_site/
+notebooks/_book/
+notebooks/_freeze/
+
+# --- Targets pipeline ---------------------------------------------------
+_targets/
+
+# --- Data (lives on cluster only; not in git) ---------------------------
+data/
+results/
+!results/.gitkeep
+
+# --- OS / editors -------------------------------------------------------
+.DS_Store
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# --- Tunnel commands written for Mac access -----------------------------
+.tunnel_*
